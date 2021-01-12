@@ -99,4 +99,15 @@ public class Auction
             return null;
         }
     }
+    
+    public void close(){
+        for (Lot lot : lots){
+            if(lot.getHighestBid() != null){
+                System.out.println("La puja más alta para el lote " + lot.getNumber() + " es de: " + lot.getHighestBid().getBidder().getName() + " con un valor de " + lot.getHighestBid().getValue());
+            }
+            else{
+                System.out.println("El lote " + lot.getNumber() + " no se ha vendido");
+            }
+        }
+    }
 }
