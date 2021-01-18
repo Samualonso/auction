@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A simple model of an auction.
@@ -78,26 +79,31 @@ public class Auction
      */
     public Lot getLot(int lotNumber)
     {
-        if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
-            // The number seems to be reasonable.
-            Lot selectedLot = lots.get(lotNumber - 1);
-            // Include a confidence check to be sure we have the
-            // right lot.
-            if(selectedLot.getNumber() != lotNumber) {
-                System.out.println("Internal error: Lot number " +
-                                   selectedLot.getNumber() +
-                                   " was returned instead of " +
-                                   lotNumber);
-                // Don't return an invalid lot.
-                selectedLot = null;
+        Lot selectedLot = null;
+        if((lotNumber >= 1) && (lotNumber < nextLotNumber)){
+            Iterator<Lot> it = lots.iterator();
+            while (it.hasNext()){
+                Lot selected = it.next();
+                if(selected.getNumber() == lotNumber){
+                    selectedLot = selected;
+                }
             }
-            return selectedLot;
         }
-        else {
-            System.out.println("Lot number: " + lotNumber +
-                               " does not exist.");
-            return null;
+        else{
+            System.out.println("Lot number: " + lotNumber + " does not exist.");
         }
+        return selectedLot;
+    }
+    
+    /**
+     * Elimina el lote con el numero de lote especificado.
+     * @param number El número del lote que hay que eliminar,
+     * @return El lote con el número dado o null si no existe tal lote.
+     */
+    public Lot removeLot(int number){
+        Lot lotRemoved = getLot(number);
+        lots.remove(lotRemoved);
+        return lotRemoved;
     }
     
     public void close(){
