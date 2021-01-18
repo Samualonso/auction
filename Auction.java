@@ -80,10 +80,12 @@ public class Auction
     public Lot getLot(int lotNumber)
     {
         Lot selectedLot = null;
+        int contador = 0;
         if((lotNumber >= 1) && (lotNumber < nextLotNumber)){
             Iterator<Lot> it = lots.iterator();
-            while (it.hasNext()){
+            while (contador < lotNumber){
                 Lot selected = it.next();
+                contador += 1;
                 if(selected.getNumber() == lotNumber){
                     selectedLot = selected;
                 }
