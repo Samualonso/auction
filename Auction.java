@@ -88,7 +88,6 @@ public class Auction
                 contador += 1;
                 if(selected.getNumber() == lotNumber){
                     selectedLot = selected;
-                    contador = selectedLot.getNumber();
                 }
             }
         }
