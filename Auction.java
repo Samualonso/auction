@@ -83,11 +83,12 @@ public class Auction
         int contador = 0;
         if((lotNumber >= 1) && (lotNumber < nextLotNumber)){
             Iterator<Lot> it = lots.iterator();
-            while (contador < lotNumber){
+            while (contador < lots.size() && (selectedLot == null)){
                 Lot selected = it.next();
                 contador += 1;
                 if(selected.getNumber() == lotNumber){
                     selectedLot = selected;
+                    contador = selectedLot.getNumber();
                 }
             }
         }
